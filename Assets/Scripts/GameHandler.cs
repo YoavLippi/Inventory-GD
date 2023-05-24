@@ -193,9 +193,13 @@ public class GameHandler : MonoBehaviour
             
             case "Shop":
                 //it's always possible, so we add the money back, recolor the costs based on the new money, and set possible
-                moneyAmount += movedItem.Value;
-                Shop.ColorCosts(moneyAmount);
-                possible = true;
+                if (original.name != "Chest")
+                {
+                    moneyAmount += movedItem.Value;
+                    Shop.ColorCosts(moneyAmount);
+                    possible = true;
+                }
+
                 break;
             
             case "Chest":
