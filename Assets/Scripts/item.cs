@@ -25,6 +25,7 @@ namespace DefaultNamespace
             get => costDisplay;
             set => costDisplay = value;
         }
+        
         public GameHandler Main
         {
             get => main;
@@ -92,6 +93,20 @@ namespace DefaultNamespace
                 sr.sortingOrder = 10;
                 sr.material = transparent;
                 clone.GetComponent<item>().Text.text = "";
+            }
+        }
+
+        //Added after submission
+        private void OnMouseOver()
+        {
+            if (Input.mouseScrollDelta.magnitude != 0)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, LayerMask.GetMask("Inventory"));
+                if (hit.collider)
+                {
+                    fromInventory = hit.collider.gameObject.transform.parent.gameObject;
+                }
+                main.moveItemAuto(fromInventory, this);
             }
         }
 

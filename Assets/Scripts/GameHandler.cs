@@ -120,7 +120,7 @@ public class GameHandler : MonoBehaviour
                 moneyDisplay.text = "" + moneyAmount;
                 numTimesClickedB++;
                 int newCost = 10 + 2 * numTimesClickedB;
-                backUp.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Upgrade Chest ({newCost})";
+                backUp.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Upgrade Pack ({newCost})";
                 
                 switch (numTimesClickedB)
                 {
