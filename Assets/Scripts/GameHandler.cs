@@ -200,7 +200,7 @@ public class GameHandler : MonoBehaviour
             
             case "Chest":
                 //possible if less than the max or the chest is unlimited
-                if (Chest.Inventory.Count < Chest.MaxSize || !Chest.HasMax)
+                if ((Chest.Inventory.Count < Chest.MaxSize || !Chest.HasMax) && original.name == "Backpack")
                 {
                     possible = true;
                 }
@@ -230,6 +230,7 @@ public class GameHandler : MonoBehaviour
                 }
             }
 
+            bool movable = true;
             switch (original.name)
             {
                 case "Backpack":
@@ -241,21 +242,32 @@ public class GameHandler : MonoBehaviour
                     Shop.ColorCosts(moneyAmount);
                     break;
                 case "Chest":
-                    Chest.RemoveItem(baseItem);
+                    if (location.name == "Backpack")
+                    {
+                        Chest.RemoveItem(baseItem);
+                    }
+                    else
+                    {
+                        movable = false;
+                    }
+
                     break;
             }
 
-            switch (location.name)
+            if (movable)
             {
-                case "Backpack":
-                    Backpack.AddItem(baseItem);
-                    break;
-                case "Shop":
-                    Shop.AddItem(baseItem);
-                    break;
-                case "Chest":
-                    Chest.AddItem(baseItem);
-                    break;
+                switch (location.name)
+                {
+                    case "Backpack":
+                        Backpack.AddItem(baseItem);
+                        break;
+                    case "Shop":
+                        Shop.AddItem(baseItem);
+                        break;
+                    case "Chest":
+                        Chest.AddItem(baseItem);
+                        break;
+                }
             }
 
             moneyDisplay.text = "" + moneyAmount;
